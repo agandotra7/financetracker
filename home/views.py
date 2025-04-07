@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from dotenv import load_dotenv
+load_dotenv()
 
 # Create your views here.
 def index(request):

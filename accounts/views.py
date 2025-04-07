@@ -16,7 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 import os
 
-openai.api_key = os.getenv("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")
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def password_reset_done(request):
     return render(request, 'accounts/password_reset_done.html')
