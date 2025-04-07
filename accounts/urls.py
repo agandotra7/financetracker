@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-
+#OPEN AI
 
 urlpatterns = [
     path('signup', views.signup, name='accounts.signup'),

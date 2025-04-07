@@ -1,4 +1,6 @@
 from django.shortcuts import render
+
+#OPEN AI
 from dotenv import load_dotenv
 load_dotenv()
 
