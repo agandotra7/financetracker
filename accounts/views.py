@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login
 from django.contrib.auth.hashers import make_password
 
-#OPEN AI ISH
+#OPEN AI
 import openai
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
