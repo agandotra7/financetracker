@@ -9,6 +9,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login
 from django.contrib.auth.hashers import make_password
 
+#OPEN AI
+import openai
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+import os
+
+openai.api_key = os.getenv("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")
+
 def password_reset_done(request):
     return render(request, 'accounts/password_reset_done.html')
 def custom_password_reset(request):
@@ -74,3 +83,28 @@ def signup(request):
             template_data['form'] = form
             return render(request, 'accounts/signup.html',
                           {'template_data': template_data})
+
+#OPEN AI
+@csrf_exempt
+def get_financial_advice(request):
+    if request.method == 'POST':
+        body = json.loads(request.body)
+        user_input = body.get('message', '')
+
+        prompt = f"Give financial advice based on this input: {user_input}"
+
+        try:
+            response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": "You are a helpful financial advisor."},
+                    {"role": "user", "content": prompt}
+                ]
+            )
+            advice = response['choices'][0]['message']['content']
+            return JsonResponse({'advice': advice})
+
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'POST request required'}, status=400)
