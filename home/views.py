@@ -11,3 +11,9 @@ def about(request):
     template_data['title'] = 'About'
     return render(request, 'home/about.html',
                   {'template_data': template_data})
+
+def dashboard(request):
+    template_data = {}
+    template_data['title'] = 'Dashboard'
+    return render(request, 'home/dashboard.html',
+                  {'template_data': template_data})
