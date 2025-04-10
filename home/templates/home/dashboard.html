@@ -9,10 +9,52 @@
       <div class="col-lg-6 mb-4 mb-lg-0">
         <h2 class="fw-bold text-primary mb-4">My Dashboard</h2>
         <p>
-          Note from chloe: going to add buttons/basic functionalities! Maybe discuss UI design in class?
+          Note from Chloe: going to add buttons/basic functionalities! Maybe discuss UI design in class?
         </p>
+      </div>
+    </div>
+
+    <!-- Financial Advice Widget -->
+    <div class="row mt-5">
+      <div class="col-lg-8">
+        <h4 class="fw-bold mb-3">Ask for Financial Advice 💬</h4>
+        <input type="text" id="questionInput" placeholder="e.g., How do I start investing?" class="form-control mb-2" />
+        <button id="apiBtn" class="btn btn-primary mb-3">Ask</button>
+        <div id="apiResponse" class="alert alert-info d-none" role="alert"></div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  document.getElementById('apiBtn').addEventListener('click', () => {
+    const question = document.getElementById('questionInput').value;
+    const responseEl = document.getElementById('apiResponse');
+
+    if (!question.trim()) {
+      responseEl.innerText = 'Please enter a question.';
+      responseEl.classList.remove('d-none');
+      return;
+    }
+
+    responseEl.innerText = 'Thinking... 💭';
+    responseEl.classList.remove('d-none');
+
+    fetch('/api/button-action/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+      body: JSON.stringify({ question: question }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        responseEl.innerText = data.message || data.error;
+      })
+      .catch(() => {
+        responseEl.innerText = "Something went wrong. Please try again.";
+      });
+  });
+</script>
 {% endblock %}
