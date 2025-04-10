@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Income List</h1>
+<ul class="list-group">
+    {% for income in incomes %}
+        <li class="list-group-item">{{ income.date }} - {{ income.amount }} - {{ income.source }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

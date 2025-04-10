@@ -30,6 +30,7 @@
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
+
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto align-items-center">
@@ -39,9 +40,10 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'home.about' %}">About</a>
             </li>
-
-            <!-- Show Login/Logout based on user authentication -->
             {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'add_income' %}">Add Income</a>
+              </li>
               <!-- Show Dashboard when user is logged in -->
               <li class="nav-item">
                     <a class="nav-link" href="{% url 'home.dashboard' %}">Dashboard</a>
@@ -51,7 +53,6 @@
                 <a class="nav-link" href="{% url 'accounts.logout' %}">Logout ({{ user.username }})</a>
               </li>
             {% else %}
-              <!-- Show Login and Sign Up links when user is logged out -->
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'accounts.login' %}">Login</a>
               </li>
@@ -62,7 +63,6 @@
                 <a class="nav-link" href="{% url 'accounts.signup' %}">Sign Up</a>
               </li>
             {% endif %}
-
           </ul>
         </div>
       </div>
@@ -92,6 +92,9 @@
           <ul class="list-unstyled">
             <li class="mb-2"><a href="{% url 'home.index' %}" class="text-decoration-none text-muted">Home</a></li>
             <li class="mb-2"><a href="{% url 'home.about' %}" class="text-decoration-none text-muted">About</a></li>
+            {% if user.is_authenticated %}
+              <li class="mb-2"><a href="{% url 'add_income' %}" class="text-decoration-none text-muted">Add Income</a></li>
+            {% endif %}
           </ul>
         </div>
         <div class="col-lg-4">
